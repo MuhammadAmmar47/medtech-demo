@@ -166,27 +166,52 @@
         </div>
     </div>
 
-    <!-- TAB 4: BILLING & FINANCE -->
+  <!-- TAB 4: BILLING & FINANCE -->
     <div *ngIf="activeTab === 'billing'">
         <div class="card-container">
-            <h2 style="margin-top: 0; font-size: 1.3rem;"><i class="fa-solid fa-file-invoice-dollar"></i> Hospital Billing & Revenue Summary</h2>
+            <!-- Summary Header Cards -->
+            <div class="stats-grid" style="margin-bottom: 1.5rem;">
+                <div class="stat-card">
+                    <span style="color: #64748b; font-size: 0.8rem; font-weight: 600;">TOTAL REVENUE GENERATED</span>
+                    <h3 style="margin: 0.5rem 0 0 0; font-size: 1.8rem; color: #0d9488;">Rs. {{ totalRevenue | number }}</h3>
+                </div>
+                <div class="stat-card" style="border-left-color: #3b82f6;">
+                    <span style="color: #64748b; font-size: 0.8rem; font-weight: 600;">PAID INVOICES</span>
+                    <h3 style="margin: 0.5rem 0 0 0; font-size: 1.8rem; color: #3b82f6;">{{ paidInvoicesCount }} Settled</h3>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 0; font-size: 1.3rem;"><i class="fa-solid fa-file-invoice-dollar"></i> Live Hospital Invoices & Revenue Stream</h2>
+            
             <table class="enterprise-table">
                 <thead>
                     <tr>
                         <th>Invoice ID</th>
                         <th>Patient Name</th>
+                        <th>Contact / Age</th>
                         <th>Service Details</th>
                         <th>Total Amount</th>
                         <th>Payment Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let p of patients">
-                        <td style="font-weight: bold;">INV-2026-{{ p.id }}</td>
-                        <td>{{ p.name }}</td>
-                        <td>Neurospine Consultation & Imaging</td>
-                        <td style="font-weight: bold; color: #0d9488;">Rs. {{ p.billAmount }}</td>
-                        <td><span style="background: #dcfce7; color: #166534; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">Paid</span></td>
+                        <td style="font-weight: bold; color: #0d9488;">INV-2026-{{ p.id }}</td>
+                        <td style="font-weight: 600;">{{ p.name }}</td>
+                        <td>{{ p.phone }}</td>
+                        <td style="color: #64748b; font-size: 0.85rem;">{{ p.issue | slice:0:30 }}...</td>
+                        <td style="font-weight: bold; color: #0f172a;">Rs. {{ p.billAmount | number }}</td>
+                        <td>
+                            <span style="background: #dcfce7; color: #166534; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
+                                Paid / Verified
+                            </span>
+                        </td>
+                        <td>
+                   <button class="nav-btn" style="background: #0d9488; color: white; padding: 0.3rem 0.6rem; font-size: 0.75rem;" (click)="openEditBillModal(p)">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Bill
+                    </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -194,6 +219,30 @@
     </div>
 
 </main>
+
+
+<div *ngIf="isBillModalOpen" class="modal-backdrop">
+    <div class="modal-box" style="width: 450px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.2rem;">
+            <h3 style="margin: 0; color: #0f172a; font-size: 1.1rem;"><i class="fa-solid fa-file-invoice-dollar" style="color: #0d9488;"></i> Edit Patient Invoice</h3>
+            <button (click)="closeEditBillModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
+        </div>
+
+        <div style="margin-bottom: 1.2rem; font-size: 0.9rem; color: #475569;">
+            Patient: <b style="color: #0f172a;">{{ selectedBillPatient?.name }}</b> (INV-2026-{{ selectedBillPatient?.id }})
+        </div>
+
+        <div class="form-group full" style="margin-bottom: 1.5rem;">
+            <label class="form-label">New Bill Amount (PKR)</label>
+            <input type="number" class="form-control" [(ngModel)]="editBillAmountValue" placeholder="Enter amount">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <button class="nav-btn" style="background: #e2e8f0; color: #475569; border: none;" (click)="closeEditBillModal()">Cancel</button>
+            <button class="btn-enterprise" style="width: auto; padding: 0.6rem 1.2rem;" (click)="saveBillAmount()">Update Invoice</button>
+        </div>
+    </div>
+</div>
 
 <!-- Professional Toast Notification Banner with Close Button -->
 <div *ngIf="isToastVisible" class="toast-container" style="display: flex; align-items: center; justify-content: space-between; gap: 15px;">

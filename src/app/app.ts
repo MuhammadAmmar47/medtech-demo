@@ -272,7 +272,52 @@ Helpline: 042-111-BNI-999`;
   triggerBrowserPrint() {
     window.print();
   }
+// Dynamic calculation for Finance & Billing Summary
+  get totalRevenue(): number {
+    return this.patients.reduce((sum, p) => sum + (p.billAmount || 0), 0);
+  }
 
+  get paidInvoicesCount(): number {
+    return this.patients.filter(p => p.status === 'Completed' || p.status === 'Admitted (IPD)').length;
+  }
+  // Edit Patient Bill Amount dynamically
+  editPatientBill(patient: PatientRecord) {
+    const newAmountPrompt = prompt(`Enter new bill amount for ${patient.name} (PKR):`, patient.billAmount.toString());
+    if (newAmountPrompt !== null) {
+      const parsedAmount = parseFloat(newAmountPrompt);
+      if (!isNaN(parsedAmount) && parsedAmount >= 0) {
+        patient.billAmount = parsedAmount;
+        this.showToast(`Bill updated successfully for ${patient.name}!`);
+      } else {
+        alert('Please enter a valid numeric amount.');
+      }
+    }
+  }
+  // Bill Edit Modal State
+  isBillModalOpen: boolean = false;
+  selectedBillPatient: PatientRecord | null = null;
+  editBillAmountValue: number = 0;
+
+  openEditBillModal(patient: PatientRecord) {
+    this.selectedBillPatient = patient;
+    this.editBillAmountValue = patient.billAmount;
+    this.isBillModalOpen = true;
+  }
+
+  closeEditBillModal() {
+    this.isBillModalOpen = false;
+    this.selectedBillPatient = null;
+  }
+
+  saveBillAmount() {
+    if (this.selectedBillPatient && this.editBillAmountValue >= 0) {
+      this.selectedBillPatient.billAmount = this.editBillAmountValue;
+      this.showToast(`Bill updated successfully for ${this.selectedBillPatient.name}!`);
+      this.closeEditBillModal();
+    } else {
+      this.showToast('Please enter a valid amount.', 'info');
+    }
+  }
   get waitingCount() { return this.patients.filter(p => p.status === 'Waiting').length; }
   get ipdCount() { return this.patients.filter(p => p.status === 'Admitted (IPD)').length; }
   get completedCount() { return this.patients.filter(p => p.status === 'Completed').length; }
