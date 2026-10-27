@@ -1,0 +1,77 @@
+<section class="billing-section">
+  <div class="card-container">
+    <!-- Summary Header Cards -->
+    <div class="stats-grid billing-stats">
+      <app-stat-card
+        label="TOTAL REVENUE GENERATED"
+        [value]="totalRevenue() | currencyPkr"
+        borderColor="#0d9488"
+        valueColor="#0d9488">
+      </app-stat-card>
+
+      <app-stat-card
+        label="PAID INVOICES"
+        [value]="paidInvoicesCount() + ' Settled'"
+        borderColor="#3b82f6"
+        valueColor="#3b82f6">
+      </app-stat-card>
+    </div>
+
+    <h2 class="billing-title">
+      <i class="fa-solid fa-file-invoice-dollar header-icon" aria-hidden="true"></i>
+      Live Hospital Invoices &amp; Revenue Stream
+    </h2>
+
+    <table class="enterprise-table">
+      <thead>
+        <tr>
+          <th>Invoice ID</th>
+          <th>Patient Name</th>
+          <th>Contact / Age</th>
+          <th>Service Details</th>
+          <th>Total Amount</th>
+          <th>Payment Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of patients(); track p.id) {
+          <tr>
+            <td class="invoice-id">INV-2026-{{ p.id }}</td>
+            <td class="patient-name">{{ p.name }}</td>
+            <td>{{ p.phone }}</td>
+            <td class="service-details">{{ p.issue | slice:0:30 }}...</td>
+            <td class="amount-cell">{{ p.billAmount | currencyPkr }}</td>
+            <td>
+              <span class="paid-badge">
+                Paid / Verified
+              </span>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn-action btn-action--edit"
+                (click)="openEditBillModal(p)">
+                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit Bill
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              No invoices generated yet.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Edit Bill Modal -->
+<app-bill-edit-modal
+  [patient]="selectedBillPatient"
+  [isOpen]="isBillModalOpen"
+  (close)="closeEditBillModal()"
+  (save)="saveBillAmount($event)">
+</app-bill-edit-modal>

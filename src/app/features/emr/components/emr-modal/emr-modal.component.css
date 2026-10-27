@@ -1,0 +1,92 @@
+.emr-modal-box {
+  width: 700px;
+}
+
+.header-icon {
+  margin-right: 0.3rem;
+}
+
+.ai-box {
+  background: var(--ai-bg, #f0fdf4);
+  border: 1px solid var(--ai-border, #bbf7d0);
+  border-left: 4px solid var(--ai-accent, #16a34a);
+  padding: 1rem;
+  border-radius: var(--radius-md, 8px);
+  margin-bottom: 1.5rem;
+}
+
+.ai-box__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.4rem;
+}
+
+.ai-box__icon {
+  color: var(--ai-accent, #16a34a);
+  font-size: 1.1rem;
+}
+
+.ai-box__title {
+  font-weight: 700;
+  color: var(--ai-label, #166534);
+  font-size: 0.9rem;
+}
+
+.ai-box__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ai-text, #14532d);
+  line-height: 1.4;
+}
+
+.complaint-preview {
+  background: var(--surface-body, #f8fafc);
+  padding: 0.75rem;
+  border-radius: var(--radius-md, 8px);
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-dark, #334155);
+}
+
+.btn-dark {
+  background: var(--text-subtle, #475569);
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.btn-blue {
+  background: var(--color-blue, #3b82f6);
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.btn-green {
+  background: var(--ai-accent, #16a34a);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.btn-dark:hover,
+.btn-blue:hover,
+.btn-green:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,87 @@
+.ipd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.ipd-title {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-heading, #0f172a);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-icon {
+  color: var(--color-primary, #0d9488);
+}
+
+.ipd-subtitle {
+  color: var(--text-muted, #64748b);
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0 0;
+}
+
+.ipd-count-badge {
+  background: var(--badge-consultation-bg, #e0f2fe);
+  color: var(--badge-consultation-text, #0369a1);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md, 8px);
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.bed-number {
+  font-weight: bold;
+  color: var(--color-blue, #3b82f6);
+}
+
+.patient-name {
+  font-weight: 600;
+  color: var(--text-heading, #0f172a);
+}
+
+.diagnosis-cell {
+  color: var(--text-muted, #64748b);
+  max-width: 250px;
+  font-size: 0.85rem;
+}
+
+.bp-text {
+  font-weight: 600;
+  color: var(--text-dark, #334155);
+}
+
+.mri-text {
+  font-size: 0.85rem;
+}
+
+.recovery-badge {
+  background: var(--badge-ipd-bg, #dbeafe);
+  color: var(--badge-ipd-text, #1e40af);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill, 20px);
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem !important;
+  color: var(--text-muted, #64748b);
+  font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+  .ipd-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

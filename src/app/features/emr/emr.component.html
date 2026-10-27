@@ -1,0 +1,95 @@
+<section class="emr-section">
+  <div class="card-container">
+    <div class="emr-header">
+      <h2 class="emr-title">Doctor's Live Queue &amp; EMR Workspace</h2>
+      <div class="search-box">
+        <input
+          type="text"
+          class="form-control search-input"
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event)"
+          placeholder="Search patient...">
+      </div>
+    </div>
+
+    <table class="enterprise-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Patient Name</th>
+          <th>Age / Phone</th>
+          <th>Neuro Complaint</th>
+          <th>Pain Score</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of filteredPatients(); track p.id) {
+          <tr>
+            <td class="token-cell">#{{ p.id }}</td>
+            <td class="name-cell">{{ p.name }}</td>
+            <td>{{ p.age }} yrs | {{ p.phone }}</td>
+            <td class="complaint-cell">{{ p.issue }}</td>
+            <td><span class="pain-score">{{ p.painScore }}/10</span></td>
+            <td>
+              <app-status-badge [status]="p.status"></app-status-badge>
+            </td>
+            <td>
+              <div class="action-btns">
+                <button
+                  type="button"
+                  class="btn-action btn-action--emr"
+                  (click)="openEMR(p)">
+                  EMR
+                </button>
+                @if (p.status === 'Waiting') {
+                  <button
+                    type="button"
+                    class="btn-action btn-action--call"
+                    (click)="callInPatient(p)">
+                    Call In
+                  </button>
+                }
+                @if (p.status !== 'Admitted (IPD)') {
+                  <button
+                    type="button"
+                    class="btn-action btn-action--admit"
+                    (click)="updateStatus(p, 'Admitted (IPD)')">
+                    Admit
+                  </button>
+                }
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              No patients found matching your search.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Sub-Modals -->
+<app-emr-modal
+  [patient]="activePatient!"
+  [isOpen]="isEmrModalOpen"
+  (close)="closeEMR()"
+  (save)="handleEmrSave($event)">
+</app-emr-modal>
+
+<app-print-modal
+  [patient]="activePatient"
+  [isOpen]="isPrintModalOpen"
+  (close)="closePrintModal()">
+</app-print-modal>
+
+<app-whatsapp-modal
+  [messageContent]="whatsappMessageContent"
+  [isOpen]="isWhatsAppModalOpen"
+  (close)="closeWhatsAppModal()">
+</app-whatsapp-modal>

@@ -1,0 +1,117 @@
+<section class="booking-section">
+  <!-- Stats Row -->
+  <div class="stats-grid">
+    <app-stat-card
+      label="ACTIVE WAITING QUEUE"
+      [value]="waitingCount() + ' Patients'"
+      borderColor="#0d9488"
+      valueColor="#0d9488">
+    </app-stat-card>
+
+    <app-stat-card
+      label="IPD / POST-OP WARDS"
+      [value]="ipdCount() + ' Admitted'"
+      borderColor="#3b82f6"
+      valueColor="#3b82f6">
+    </app-stat-card>
+
+    <app-stat-card
+      label="CONSULTATIONS DONE"
+      [value]="completedCount() + ' Today'"
+      borderColor="#10b981"
+      valueColor="#10b981">
+    </app-stat-card>
+  </div>
+
+  <!-- Booking Form Container -->
+  <div class="card-container booking-container">
+    <div class="booking-header">
+      <h2 class="booking-title">
+        <i class="fa-solid fa-brain header-icon" aria-hidden="true"></i>
+        {{ config.doctorName }} - {{ config.department }}
+      </h2>
+      <p class="booking-subtitle">
+        {{ config.hospitalName }}, {{ config.address }}
+      </p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="form-grid">
+      <div class="form-group full">
+        <label for="patientName" class="form-label">Patient Full Name</label>
+        <input
+          id="patientName"
+          type="text"
+          class="form-control"
+          [(ngModel)]="bookingForm.name"
+          name="name"
+          required
+          placeholder="e.g. Muhammad Ali">
+      </div>
+
+      <div class="form-group">
+        <label for="patientAge" class="form-label">Age</label>
+        <input
+          id="patientAge"
+          type="number"
+          class="form-control"
+          [(ngModel)]="bookingForm.age"
+          name="age"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="patientPhone" class="form-label">Phone Number (SMS Token)</label>
+        <input
+          id="patientPhone"
+          type="tel"
+          class="form-control"
+          [(ngModel)]="bookingForm.phone"
+          name="phone"
+          required
+          placeholder="0300-1234567">
+      </div>
+
+      <div class="form-group">
+        <label for="consultationDate" class="form-label">Consultation Date</label>
+        <input
+          id="consultationDate"
+          type="date"
+          class="form-control"
+          [(ngModel)]="bookingForm.date"
+          name="date"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="painScore" class="form-label">Pain Severity Score (ODI / 10)</label>
+        <input
+          id="painScore"
+          type="number"
+          min="1"
+          max="10"
+          class="form-control"
+          [(ngModel)]="bookingForm.painScore"
+          name="painScore"
+          required>
+      </div>
+
+      <div class="form-group full">
+        <label for="complaint" class="form-label">Neurological Complaint / Symptoms</label>
+        <textarea
+          id="complaint"
+          class="form-control"
+          rows="3"
+          [(ngModel)]="bookingForm.issue"
+          name="issue"
+          required
+          placeholder="Describe lower back pain, radiation to legs, numbness, etc."></textarea>
+      </div>
+
+      <div class="form-group full">
+        <button type="submit" class="btn-primary">
+          Generate Token & Secure Booking
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

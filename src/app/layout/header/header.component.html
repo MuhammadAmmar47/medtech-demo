@@ -1,0 +1,28 @@
+<header class="app-header">
+  <div class="brand-box">
+    <img src="logo.png" alt="MedTech Logo" class="brand-logo">
+    <div class="brand-text">
+      <h2 class="brand-title">{{ config.systemTitle }}</h2>
+      <span class="brand-subtitle">{{ config.systemSubtitle }}</span>
+    </div>
+  </div>
+
+  <nav class="nav-tabs" aria-label="Main Navigation">
+    <a routerLink="/booking" routerLinkActive="active" class="nav-btn">
+      <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
+      <span>Patient Booking</span>
+    </a>
+    <a routerLink="/emr" routerLinkActive="active" class="nav-btn">
+      <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+      <span>Doctor EMR & Queue</span>
+    </a>
+    <a routerLink="/ipd" routerLinkActive="active" class="nav-btn">
+      <i class="fa-solid fa-bed-pulse" aria-hidden="true"></i>
+      <span>IPD / Wards</span>
+    </a>
+    <a routerLink="/billing" routerLinkActive="active" class="nav-btn">
+      <i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
+      <span>Billing & Finance</span>
+    </a>
+  </nav>
+</header>

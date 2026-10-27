@@ -1,0 +1,44 @@
+@if (isOpen && patient) {
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box letterhead-box" (click)="$event.stopPropagation()">
+      <div class="letterhead-header">
+        <h2 class="letterhead-clinic">{{ config.hospitalName }}</h2>
+        <p class="letterhead-doctor">{{ config.doctorName }}, {{ config.doctorQualifications }}</p>
+        <p class="letterhead-contact">{{ config.address }} | Helpline: {{ config.helpline }}</p>
+      </div>
+
+      <div class="patient-details-grid">
+        <div><b>Patient Name:</b> {{ patient.name }}</div>
+        <div><b>Age / Gender:</b> {{ patient.age }} yrs</div>
+        <div><b>Token ID:</b> #{{ patient.id }}</div>
+        <div><b>Date:</b> {{ patient.date }}</div>
+        <div class="details-full"><b>Diagnosis:</b> {{ patient.issue }}</div>
+      </div>
+
+      <div class="prescription-section">
+        <div class="rx-symbol">℞</div>
+        <div class="prescription-box">
+          {{ patient.prescription || 'No medicines prescribed.' }}
+        </div>
+      </div>
+
+      <div class="letterhead-footer">
+        <div class="disclaimer-text">
+          Computer generated official BNI prescription.<br>
+          Valid without physical signature via MedTech Enterprise.
+        </div>
+        <div class="doctor-signature-box">
+          <div class="sign-name">{{ config.doctorName }}</div>
+          <div class="sign-title">Consultant Neurosurgeon</div>
+        </div>
+      </div>
+
+      <div class="no-print print-actions">
+        <button type="button" class="btn-secondary" (click)="onClose()">Close</button>
+        <button type="button" class="btn-primary btn-print" (click)="print()">
+          🖨️ Print / Save as PDF
+        </button>
+      </div>
+    </div>
+  </div>
+}

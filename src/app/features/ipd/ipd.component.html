@@ -1,0 +1,53 @@
+<section class="ipd-section">
+  <div class="card-container">
+    <div class="ipd-header">
+      <div>
+        <h2 class="ipd-title">
+          <i class="fa-solid fa-bed-pulse header-icon" aria-hidden="true"></i>
+          Inpatient Department (IPD) - Post-Op Ward
+        </h2>
+        <p class="ipd-subtitle">
+          Monitoring neurosurgery recovery beds, vital signs, and post-op care.
+        </p>
+      </div>
+      <div class="ipd-count-badge">
+        Total Admitted: {{ ipdCount() }} Patients
+      </div>
+    </div>
+
+    <table class="enterprise-table">
+      <thead>
+        <tr>
+          <th>Bed No.</th>
+          <th>Patient Name</th>
+          <th>Admission Diagnosis</th>
+          <th>Blood Pressure</th>
+          <th>MRI Status</th>
+          <th>Ward Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of admittedPatients(); track p.id; let i = $index) {
+          <tr>
+            <td class="bed-number">{{ getBedNumber(i) }}</td>
+            <td class="patient-name">{{ p.name }}</td>
+            <td class="diagnosis-cell">{{ p.issue }}</td>
+            <td><span class="bp-text">{{ p.bp }}</span></td>
+            <td class="mri-text">{{ p.mriStatus }}</td>
+            <td>
+              <span class="recovery-badge">
+                Stable / Recovery
+              </span>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state">
+              No patients currently admitted in IPD wards.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

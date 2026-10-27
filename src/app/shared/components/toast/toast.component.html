@@ -1,0 +1,14 @@
+@if (state().isVisible) {
+  <aside class="toast-card" [class.toast-info]="state().type === 'info'" role="status" aria-live="polite">
+    <div class="toast-body">
+      <i class="fa-solid fa-circle-check toast-icon" aria-hidden="true"></i>
+      <div class="toast-text-group">
+        <span class="toast-category">MedTech Notification</span>
+        <span class="toast-message">{{ state().message }}</span>
+      </div>
+    </div>
+    <button type="button" class="toast-close-btn" (click)="close()" title="Close notification" aria-label="Close notification">
+      &times;
+    </button>
+  </aside>
+}

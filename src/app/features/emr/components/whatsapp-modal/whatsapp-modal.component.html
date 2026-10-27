@@ -1,0 +1,28 @@
+@if (isOpen) {
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box whatsapp-box" (click)="$event.stopPropagation()">
+      <div class="whatsapp-header">
+        <div class="whatsapp-header__info">
+          <div class="whatsapp-avatar">
+            <i class="fa-brands fa-whatsapp whatsapp-icon" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h3 class="whatsapp-title">WhatsApp Prescription Dispatched</h3>
+            <span class="whatsapp-subtitle">BNI Secure Automated Gateway (API v2.4)</span>
+          </div>
+        </div>
+        <span class="delivery-status">Delivered ✓✓</span>
+      </div>
+
+      <div class="whatsapp-message-bubble">
+        {{ messageContent }}
+      </div>
+
+      <div class="whatsapp-footer">
+        <button type="button" class="btn-whatsapp" (click)="onClose()">
+          Done &amp; Close
+        </button>
+      </div>
+    </div>
+  </div>
+}

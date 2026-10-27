@@ -1,0 +1,79 @@
+@if (isOpen && patient) {
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box emr-modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fa-solid fa-file-medical header-icon" aria-hidden="true"></i>
+          Clinical EMR &amp; AI Workspace: {{ patient.name }}
+        </h3>
+        <button type="button" class="modal-close" (click)="onClose()" aria-label="Close EMR">&times;</button>
+      </div>
+
+      <!-- AI Diagnostic Copilot (CDSS) -->
+      <div class="ai-box">
+        <div class="ai-box__header">
+          <i class="fa-solid fa-brain ai-box__icon" aria-hidden="true"></i>
+          <span class="ai-box__title">BNI Neurospine AI Diagnostic Assistant (CDSS)</span>
+        </div>
+        <p class="ai-box__text">
+          {{ patient.aiPrediction || 'Analyzing neurological markers & pain score (' + patient.painScore + '/10)...' }}
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="emrBp" class="form-label">Blood Pressure</label>
+          <input
+            id="emrBp"
+            type="text"
+            class="form-control"
+            [(ngModel)]="editBp"
+            placeholder="120/80">
+        </div>
+
+        <div class="form-group">
+          <label for="emrMri" class="form-label">MRI / Diagnostic Report Status</label>
+          <input
+            id="emrMri"
+            type="text"
+            class="form-control"
+            [(ngModel)]="editMri"
+            placeholder="MRI Lumbar Spine normal">
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Patient Chief Complaint</label>
+          <p class="complaint-preview">
+            {{ patient.issue }} (Pain Scale: {{ patient.painScore }}/10)
+          </p>
+        </div>
+
+        <div class="form-group full">
+          <label for="emrPrescription" class="form-label">Digital Prescription &amp; Neurosurgery Notes</label>
+          <textarea
+            id="emrPrescription"
+            class="form-control"
+            rows="4"
+            [(ngModel)]="editPrescription"
+            placeholder="Type prescription medicines, dosage, and physiotherapy instructions..."></textarea>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="button" class="btn-dark" (click)="onSave('save')">
+          Save
+        </button>
+        <button type="button" class="btn-blue" (click)="onSave('print')">
+          Save &amp; Print
+        </button>
+        <button type="button" class="btn-green" (click)="onSave('whatsapp')">
+          Save &amp; WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+}

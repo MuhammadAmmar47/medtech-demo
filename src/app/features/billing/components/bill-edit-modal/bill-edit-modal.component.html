@@ -1,0 +1,37 @@
+@if (isOpen && patient) {
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box bill-modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fa-solid fa-file-invoice-dollar header-icon" aria-hidden="true"></i>
+          Edit Patient Invoice
+        </h3>
+        <button type="button" class="modal-close" (click)="onClose()" aria-label="Close invoice modal">&times;</button>
+      </div>
+
+      <div class="patient-summary">
+        Patient: <b>{{ patient.name }}</b> (INV-2026-{{ patient.id }})
+      </div>
+
+      <div class="form-group full amount-input-group">
+        <label for="billAmount" class="form-label">New Bill Amount (PKR)</label>
+        <input
+          id="billAmount"
+          type="number"
+          class="form-control"
+          [(ngModel)]="editAmount"
+          placeholder="Enter amount"
+          min="0">
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="button" class="btn-primary btn-update" (click)="onSave()">
+          Update Invoice
+        </button>
+      </div>
+    </div>
+  </div>
+}

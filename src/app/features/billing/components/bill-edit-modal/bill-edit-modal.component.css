@@ -1,0 +1,27 @@
+.bill-modal-box {
+  width: 450px;
+}
+
+.header-icon {
+  color: var(--color-primary, #0d9488);
+  margin-right: 0.3rem;
+}
+
+.patient-summary {
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text-subtle, #475569);
+}
+
+.patient-summary b {
+  color: var(--text-heading, #0f172a);
+}
+
+.amount-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.btn-update {
+  width: auto;
+  padding: 0.6rem 1.2rem;
+}
