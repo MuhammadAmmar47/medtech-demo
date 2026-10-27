@@ -237,3 +237,80 @@
     display: none !important;
   }
 }
+
+/* ==========================================
+   MOBILE & TABLET RESPONSIVE FIXES
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+/* Mobile par body aur root ko bilkul edge-to-edge karein */
+  html, body, app-root {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    background-color: #f8fafc !important;
+  }
+ /* Saare cards, containers aur wrappers ko full width bana dein */
+  .card-container, 
+  .main-wrapper, 
+  div[style*="max-width"],
+  div[style*="margin: 20px"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Main wrapper ya container ko 100% karein */
+  .stats-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+    margin: 0 !important;
+  }
+
+  /* Header ko stack karein */
+  header, .navbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+
+  /* Navigation tabs ko wrap karein */
+  .nav-tabs, div[style*="display: flex"] {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  /* Tables ko scrollable banayein taake layout na phatay */
+  table, .enterprise-table {
+    width: 100% !important;
+    display: block !important;
+    overflow-x: auto !important;
+  }
+/* Form ke grids aur rows ko mobile par single column (vertical) kar dein */
+  form, .form-grid, div[style*="grid-template-columns"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  /* Saare form control inputs aur labels full width ho jayein */
+  .form-group, .form-control, input, select, textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Card container ki padding mobile par thori balanced karein */
+  .card-container {
+    padding: 15px !important;
+    margin: 10px !important;
+    width: auto !important;
+  }
+}
